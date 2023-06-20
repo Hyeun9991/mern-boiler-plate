@@ -16,7 +16,7 @@ app.use(cookieParser());
 // Routes 설정
 app.use('/api/users', userRoutes);
 
-// Mongoose 설정
+// Mongoose 설정, Server 연결
 const PORT = process.env.PORT || 8123;
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -24,6 +24,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
+    console.log('Successfully connected to MongoDB.');
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
   })
   .catch((error) => console.log(`${error} did not connect`));
